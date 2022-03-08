@@ -1,23 +1,23 @@
 import 'package:admin/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:admin/controllers/pp_controller.dart';
+import 'package:admin/controllers/bmpk_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
-    {VoidCallback? pressDetail, VoidCallback? pressTawar}) {
-  int offset = Provider.of<ValPpController>(context, listen: false).offset;
+Widget BMPKCard(BuildContext context, int index, BMPKController bmpk_controller,
+    {VoidCallback? pressDetail, VoidCallback? pressDelete}) {
+  int offset = Provider.of<BMPKController>(context, listen: false).offset;
 
-  String NO_BUKTI = val_bar.data_ValPpList[index]['NO_BUKTI'] ?? "-";
-  String date = val_bar.data_ValPpList[index]['TGL'] ?? "-";
-  DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(date);
-  String TGL = DateFormat("dd-MM-yyyy").format(tempDate);
-  String DR = val_bar.data_ValPpList[index]['DR'] ?? "-";
-  String tempTOTAL_QTY = val_bar.data_ValPpList[index]['TOTAL_QTY'] ?? "-";
-  String TOTAL_QTY =
-      NumberFormat.decimalPattern().format(double.parse(tempTOTAL_QTY));
-  String COBA_VAL = val_bar.data_ValPpList[index]['COBA_VAL'] ?? "-";
+  // String NO_BUKTI = bmpk_controller.data_BMPKList[index]['NO_BUKTI'] ?? "-";
+  // String date = bmpk_controller.data_BMPKList[index]['TGL'] ?? "-";
+  // DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(date);
+  // String TGL = DateFormat("dd-MM-yyyy").format(tempDate);
+  // String NAMAS = bmpk_controller.data_BMPKList[index]['NAMAS'] ?? "-";
+  // String KODES = bmpk_controller.data_BMPKList[index]['KODES'] ?? "-";
+  // String tempTOTAL = bmpk_controller.data_BMPKList[index]['TOTAL'] ?? "-";
+  // String TOTAL = NumberFormat.decimalPattern().format(double.parse(tempTOTAL));
+  // String COBA_VAL = bmpk_controller.data_BMPKList[index]['COBA_VAL'] ?? "-";
 
   final GlobalKey<State> _LoaderDialog = new GlobalKey<State>();
 
@@ -45,8 +45,8 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
             TextButton(
               child: Text('Validasi'),
               onPressed: () {
-                val_bar.update_ValPp(NO_BUKTI);
-                Navigator.of(context).pop();
+                // bmpk_controller.update_BMPK(NO_BUKTI);
+                // Navigator.of(context).pop();
               },
             ),
           ],
@@ -89,7 +89,8 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
                 onTap: pressDetail,
                 child: Center(
                   child: Text(
-                    NO_BUKTI,
+                    // NO_BUKTI,
+                    "-",
                     style: GoogleFonts.poppins(
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -103,28 +104,7 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
-              TGL,
-              style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          SizedBox(width: 3),
-          Expanded(
-            flex: 2,
-            child: Text(
-              DR,
-              style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          SizedBox(width: 3),
-          Expanded(
-            flex: 2,
-            child: Text(
+              // TGL,
               "-",
               style: GoogleFonts.poppins(
                 fontSize: 10,
@@ -136,7 +116,8 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
-              TOTAL_QTY,
+              // PMS,
+              "-",
               style: GoogleFonts.poppins(
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -145,31 +126,33 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           ),
           SizedBox(width: 3),
           Expanded(
-            flex: 2,
-            child: (COBA_VAL != '1')
-                ? Container(
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        _showMyDialog();
-                      },
-                      child: Center(
-                        child: Text(
-                          "Val",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+              flex: 2,
+              child:
+                  // (COBA_VAL != '1')
+                  //     ?
+                  Container(
+                height: 32,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    _showMyDialog();
+                  },
+                  child: Center(
+                    child: Text(
+                      "Val",
+                      style: GoogleFonts.poppins(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  )
-                : SizedBox(),
-          ),
+                  ),
+                ),
+              )
+              // : SizedBox(),
+              ),
           SizedBox(
             width: 8,
           ),

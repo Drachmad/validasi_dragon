@@ -1,33 +1,30 @@
 import 'package:admin/config/animation_custom_dialog.dart';
 import 'package:admin/constants.dart';
-import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:admin/controllers/pp_controller.dart';
-import 'package:admin/screens/pp/val_pp_bahan/data_detail.dart';
-import 'package:admin/screens/pp/val_pp_bahan/val_pp_bahan_card.dart';
+import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/controllers/spik_controller.dart';
+import 'package:admin/screens/spik/val_spik/data_detail.dart';
+import 'package:admin/screens/spik/val_spik/val_spik_card.dart';
 import 'package:provider/provider.dart';
 
-class ValPpBahanScreen extends StatefulWidget {
+class SPIKScreen extends StatefulWidget {
   @override
-  _ValPpBahanScreenState createState() => _ValPpBahanScreenState();
+  _SPIKScreenState createState() => _SPIKScreenState();
 }
 
-class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
+class _SPIKScreenState extends State<SPIKScreen> {
   @override
   void initState() {
-    var DR = Get.parameters['DR'];
-    Provider.of<ValPpController>(context, listen: false).initData('', DR!, '');
+    // Provider.of<SPIKController>(context, listen: false).initData('BH', '', '');
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ValPpController>(
-        builder: (context, ValPpBahan_Controller, child) {
+    return Consumer<SPIKController>(builder: (context, SPIK_Controller, child) {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -44,7 +41,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                   onPressed: context.read<MenuController>().controlMenu,
                 ),
               Text(
-                "VALIDASI PP BAHAN",
+                "VERIFIKASI SPIK",
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -67,7 +64,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                       flex: 3,
                       child: Row(
                         children: [
-                          if (ValPpBahan_Controller.data_ValPpList.length > 0)
+                          if (SPIK_Controller.data_SPIKList.length > 0)
                             Text(
                               "Showing",
                               style: GoogleFonts.poppins(
@@ -75,7 +72,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                          if (ValPpBahan_Controller.data_ValPpList.length > 0)
+                          if (SPIK_Controller.data_SPIKList.length > 0)
                             Padding(
                               padding: const EdgeInsets.only(left: 16),
                               child: Container(
@@ -91,18 +88,13 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                                     child: DropdownButton(
                                       isExpanded: true,
                                       iconEnabledColor: kPrimaryLightColor,
-                                      value: ValPpBahan_Controller.limit,
-                                      items:
-                                          ValPpBahan_Controller.dropdownLimit,
+                                      value: SPIK_Controller.limit,
+                                      items: SPIK_Controller.dropdownLimit,
                                       onChanged: (value) {
                                         if (value != null) {
-                                          ValPpBahan_Controller.limit =
-                                              value as int;
-                                          ValPpBahan_Controller
-                                              .selectDataPaginate(
-                                                  false,
-                                                  ValPpBahan_Controller
-                                                      .cari.text);
+                                          SPIK_Controller.limit = value as int;
+                                          SPIK_Controller.selectDataPaginate(
+                                              false, SPIK_Controller.cari.text);
                                         }
                                       },
                                     ),
@@ -128,11 +120,11 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                               child: Container(
                                 height: 20,
                                 child: TextField(
-                                  controller: ValPpBahan_Controller.cari,
+                                  controller: SPIK_Controller.cari,
                                   onChanged: (value) {
-                                    Provider.of<ValPpController>(context,
+                                    Provider.of<SPIKController>(context,
                                         listen: false);
-                                    Provider.of<ValPpController>(context,
+                                    Provider.of<SPIKController>(context,
                                             listen: false)
                                         .selectDataPaginate(true, value);
                                   },
@@ -159,134 +151,120 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                   ],
                 ),
               ),
-              Container(
-                color: bgColorDark,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          "NO",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "NO",
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      SizedBox(width: 3),
-                      Expanded(
-                        flex: 3,
-                        child: Text(
-                          "No PP",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    ),
+                    SizedBox(width: 3),
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        "No Bukti",
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      SizedBox(width: 3),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          "Tgl",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    ),
+                    SizedBox(width: 3),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "No Order",
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      SizedBox(width: 3),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          "DR",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    ),
+                    SizedBox(width: 3),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Tanggal",
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      SizedBox(width: 3),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          "Model",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    ),
+                    SizedBox(width: 3),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "DR",
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      SizedBox(width: 3),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          "Total Order",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    ),
+                    SizedBox(width: 3),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Proses",
+                        style: GoogleFonts.poppins(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      SizedBox(width: 3),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          "Proses",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                  ],
                 ),
               ),
+              // PaginatedDataTable(
+              //   rowsPerPage: 10,
+              // ),
               Expanded(
-                child: (ValPpBahan_Controller.data_ValPpList.length > 0)
+                child: (SPIK_Controller.data_SPIKList.length > 0)
                     ? ListView.builder(
-                        itemCount: ValPpBahan_Controller.data_ValPpList.length,
+                        itemCount: SPIK_Controller.data_SPIKList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ValPpBahanCard(
-                              context, index, ValPpBahan_Controller,
+                          return SPIKCard(context, index, SPIK_Controller,
                               pressDetail: () {
                             showAnimatedDialog(
                                 context,
                                 DataDetail(
-                                    NO_BUKTI: ValPpBahan_Controller
-                                        .data_ValPpList[index]['NO_BUKTI'],
-                                    controller: ValPpBahan_Controller),
+                                    NO_BUKTI: SPIK_Controller
+                                        .data_SPIKList[index]['NO_BUKTI'],
+                                    controller: SPIK_Controller),
                                 isFlip: true);
-                          }, pressTawar: () {});
+                          }, pressDelete: () {});
                         },
                       )
                     : Container(
                         child: Center(
                           child: TextField(
                             textAlign: TextAlign.center,
-                            controller: ValPpBahan_Controller.dataNotif,
+                            controller: SPIK_Controller.dataNotif,
                             readOnly: true,
                             style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
                             ),
                             decoration: InputDecoration(
-                              hintText: "Loading ...",
+                              hintText: "Loading . . .",
                               hintStyle: GoogleFonts.poppins(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 14),
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
                               border: InputBorder.none,
                               disabledBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
@@ -317,21 +295,20 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    if (ValPpBahan_Controller.page_index > 0) {
-                      ValPpBahan_Controller.offset -=
-                          ValPpBahan_Controller.limit;
-                      ValPpBahan_Controller.page_index--;
-                      ValPpBahan_Controller.c_page.text =
-                          (ValPpBahan_Controller.page_index + 1).toString();
-                      ValPpBahan_Controller.selectDataPaginate(
-                          false, ValPpBahan_Controller.cari.text);
+                    if (SPIK_Controller.page_index > 0) {
+                      SPIK_Controller.offset -= SPIK_Controller.limit;
+                      SPIK_Controller.page_index--;
+                      SPIK_Controller.c_page.text =
+                          (SPIK_Controller.page_index + 1).toString();
+                      SPIK_Controller.selectDataPaginate(
+                          false, SPIK_Controller.cari.text);
                     }
                   },
                   child: Container(
                     height: 30,
                     width: 80,
                     decoration: BoxDecoration(
-                      color: (ValPpBahan_Controller.offset == 0)
+                      color: (SPIK_Controller.offset == 0)
                           ? bgColorDark
                           : primaryColor,
                       borderRadius: BorderRadius.circular(5),
@@ -343,7 +320,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                         style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
-                            color: (ValPpBahan_Controller.offset == 0)
+                            color: (SPIK_Controller.offset == 0)
                                 ? bgColorDark
                                 : kPrimaryLightColor),
                       ),
@@ -353,23 +330,22 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                 pageField(),
                 InkWell(
                   onTap: () {
-                    if (ValPpBahan_Controller.page_index <=
-                        ValPpBahan_Controller.pageCount - 1) {
-                      ValPpBahan_Controller.offset +=
-                          ValPpBahan_Controller.limit;
-                      ValPpBahan_Controller.page_index++;
-                      ValPpBahan_Controller.c_page.text =
-                          (ValPpBahan_Controller.page_index + 1).toString();
-                      ValPpBahan_Controller.selectDataPaginate(
-                          false, ValPpBahan_Controller.cari.text);
+                    if (SPIK_Controller.page_index <=
+                        SPIK_Controller.pageCount - 1) {
+                      SPIK_Controller.offset += SPIK_Controller.limit;
+                      SPIK_Controller.page_index++;
+                      SPIK_Controller.c_page.text =
+                          (SPIK_Controller.page_index + 1).toString();
+                      SPIK_Controller.selectDataPaginate(
+                          false, SPIK_Controller.cari.text);
                     }
                   },
                   child: Container(
                     height: 30,
                     width: 80,
                     decoration: BoxDecoration(
-                      color: ((ValPpBahan_Controller.pageCount -
-                                  ValPpBahan_Controller.page_index) <=
+                      color: ((SPIK_Controller.pageCount -
+                                  SPIK_Controller.page_index) <=
                               1)
                           ? bgColorDark
                           : primaryColor,
@@ -382,8 +358,8 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                         style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
-                            color: ((ValPpBahan_Controller.pageCount -
-                                        ValPpBahan_Controller.page_index) <=
+                            color: ((SPIK_Controller.pageCount -
+                                        SPIK_Controller.page_index) <=
                                     1)
                                 ? bgColorDark
                                 : kPrimaryLightColor),
@@ -401,8 +377,8 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
 
   ///paginate
   Widget pageField() {
-    ValPpController pageTerima =
-        Provider.of<ValPpController>(context, listen: false);
+    SPIKController pageTerima =
+        Provider.of<SPIKController>(context, listen: false);
     return Container(
       width: 70,
       height: 35,

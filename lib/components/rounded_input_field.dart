@@ -23,7 +23,7 @@ class RoundedInputField extends StatelessWidget {
         controller: loginController.usernameLogin,
         onChanged: onChanged,
         cursorColor: primaryColor,
-        style: TextStyle(color: secondaryColor),
+        style: TextStyle(color: secondaryColor, fontSize: 12),
         decoration: InputDecoration(
           icon: Icon(
             icon,

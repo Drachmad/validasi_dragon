@@ -183,7 +183,7 @@ class _ValPpNonBahanScreenState extends State<ValPpNonBahanScreen> {
                     Expanded(
                       flex: 3,
                       child: Text(
-                        "No PO",
+                        "No Bukti",
                         style: GoogleFonts.poppins(
                           fontSize: 10,
                           fontWeight: FontWeight.w400,

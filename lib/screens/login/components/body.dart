@@ -46,7 +46,7 @@ class Body extends StatelessWidget {
               text: "LOGIN",
               press: () {
                 LoaderDialog.showLoaderDialog(context);
-                loginController.getLogin().then((value) {
+                loginController.getLogin(context).then((value) {
                   print(value);
                   Navigator.pop(context);
                   if (value != null) {

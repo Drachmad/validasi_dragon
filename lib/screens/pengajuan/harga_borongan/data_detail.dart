@@ -1,7 +1,7 @@
 import 'package:admin/constants.dart';
 import 'package:admin/responsive.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:admin/controllers/pp_controller.dart';
+import 'package:admin/controllers/pengajuan_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +23,9 @@ class _DataDetailState extends State<DataDetail> {
 
   @override
   void initState() {
-    Provider.of<ValPpController>(context, listen: false)
-        .Detail_ValPp(widget.NO_BUKTI, 'ppd');
-    Provider.of<ValPpController>(context, listen: false)
+    Provider.of<PengajuanController>(context, listen: false)
+        .Detail_Pengajuan(widget.NO_BUKTI, 'ppd');
+    Provider.of<PengajuanController>(context, listen: false)
         .Data_Image(widget.NO_BUKTI, 'pp');
     print(widget.NO_BUKTI);
     super.initState();
@@ -33,7 +33,7 @@ class _DataDetailState extends State<DataDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ValPpController>(
+    return Consumer<PengajuanController>(
         builder: (context, data_detailController, child) {
       var image = "http://nurrachmadwidyanto.web.id/friend2.jpg";
       print(data_detailController.DataImage.length);
@@ -46,7 +46,7 @@ class _DataDetailState extends State<DataDetail> {
       return AlertDialog(
         contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: Text("DETAIL PP BAHAN",
+        title: Text("DETAIL HARGA BORONGAN",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -86,17 +86,6 @@ class _DataDetailState extends State<DataDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding: (Responsive.isMobile(context))
-                        ? EdgeInsets.symmetric(horizontal: 16)
-                        : EdgeInsets.symmetric(horizontal: 128),
-                    child: CachedNetworkImage(
-                      imageUrl: image,
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  ),
                   Container(
                     color: bgColorDark,
                     child: Padding(
@@ -107,7 +96,7 @@ class _DataDetailState extends State<DataDetail> {
                           Expanded(
                             flex: 3,
                             child: Text(
-                              "Nama Barang",
+                              "Artikel",
                               style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
@@ -117,7 +106,7 @@ class _DataDetailState extends State<DataDetail> {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              "Ket Barang",
+                              "Inject",
                               style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
@@ -127,7 +116,7 @@ class _DataDetailState extends State<DataDetail> {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              "Jumlah",
+                              "Emboss",
                               style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
@@ -137,7 +126,7 @@ class _DataDetailState extends State<DataDetail> {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              "Devisi",
+                              "P. Sewing",
                               style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
@@ -147,7 +136,7 @@ class _DataDetailState extends State<DataDetail> {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              "Ket Lokasi",
+                              "P. Cat Spray",
                               style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
@@ -157,7 +146,57 @@ class _DataDetailState extends State<DataDetail> {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              "Stok",
+                              "Cat Kuas/Spray",
+                              style: GoogleFonts.poppins(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "P. Flocking",
+                              style: GoogleFonts.poppins(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "Flocking",
+                              style: GoogleFonts.poppins(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "Assembling",
+                              style: GoogleFonts.poppins(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "Comp",
+                              style: GoogleFonts.poppins(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "Giling",
                               style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
@@ -206,6 +245,17 @@ class _DataDetailState extends State<DataDetail> {
                             ),
                           ),
                   ),
+                  Padding(
+                    padding: (Responsive.isMobile(context))
+                        ? EdgeInsets.symmetric(horizontal: 16)
+                        : EdgeInsets.symmetric(horizontal: 128),
+                    child: CachedNetworkImage(
+                      imageUrl: image,
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  ),
                 ]),
           ),
         ),
@@ -214,7 +264,7 @@ class _DataDetailState extends State<DataDetail> {
   }
 
   Widget DetailCard(int index) {
-    var data_detail = Provider.of<ValPpController>(context, listen: false)
+    var data_detail = Provider.of<PengajuanController>(context, listen: false)
         .DataDetailList[index];
     return Container(
       color: secondaryColor,
@@ -225,8 +275,33 @@ class _DataDetailState extends State<DataDetail> {
             children: [
               Expanded(
                 flex: 3,
+                child: Container(
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: thirdColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: InkWell(
+                    // onTap: (){pressDetail()},
+                    child: Center(
+                      child: Text(
+                        // Artikel,
+                        "-",
+                        style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
                 child: Text(
-                  data_detail['NA_BHN'].toString(),
+                  // data_detail['KET'].toString(),
+                  // Inject,
+                  "-",
                   style: GoogleFonts.poppins(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
@@ -236,7 +311,10 @@ class _DataDetailState extends State<DataDetail> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  data_detail['KET'].toString(),
+                  // NumberFormat.decimalPattern()
+                  //     .format(double.parse(data_detail['QTY'])),
+                  // Emboss
+                  "-",
                   style: GoogleFonts.poppins(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
@@ -246,8 +324,9 @@ class _DataDetailState extends State<DataDetail> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  NumberFormat.decimalPattern()
-                      .format(double.parse(data_detail['QTY'])),
+                  // data_detail['JTEMPO'],
+                  // P. Sewing
+                  "-",
                   style: GoogleFonts.poppins(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
@@ -257,7 +336,81 @@ class _DataDetailState extends State<DataDetail> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  data_detail['JTEMPO'],
+                  // data_detail['JTEMPO'],
+                  // P. Cat Spray
+                  "-",
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  // data_detail['JTEMPO'],
+                  // Cat Kuas/Spray
+                  "-",
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  // data_detail['JTEMPO'],
+                  // P.Flocking
+                  "-",
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  // data_detail['JTEMPO'],
+                  // FLocking
+                  "-",
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  // data_detail['JTEMPO'],
+                  // Assembling
+                  "-",
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  // data_detail['JTEMPO'],
+                  // Comp
+                  "-",
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  // data_detail['JTEMPO'],
+                  // Giling
+                  "-",
                   style: GoogleFonts.poppins(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,

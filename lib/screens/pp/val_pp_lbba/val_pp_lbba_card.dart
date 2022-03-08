@@ -5,7 +5,7 @@ import 'package:admin/controllers/pp_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
+Widget ValPpLBBACard(BuildContext context, int index, ValPpController val_bar,
     {VoidCallback? pressDetail, VoidCallback? pressTawar}) {
   int offset = Provider.of<ValPpController>(context, listen: false).offset;
 
@@ -13,10 +13,13 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
   String date = val_bar.data_ValPpList[index]['TGL'] ?? "-";
   DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(date);
   String TGL = DateFormat("dd-MM-yyyy").format(tempDate);
-  String DR = val_bar.data_ValPpList[index]['DR'] ?? "-";
-  String tempTOTAL_QTY = val_bar.data_ValPpList[index]['TOTAL_QTY'] ?? "-";
-  String TOTAL_QTY =
-      NumberFormat.decimalPattern().format(double.parse(tempTOTAL_QTY));
+  String date2 = val_bar.data_ValPpList[index]['TG_SMP'] ?? "-";
+  DateTime tempDate2 = new DateFormat("yyyy-MM-dd").parse(date2);
+  String TG_SMP = DateFormat("dd-MM-yyyy").format(tempDate2);
+  String DIVISI = val_bar.data_ValPpList[index]['DIVISI'] ?? "-";
+  String KET = val_bar.data_ValPpList[index]['KET'] ?? "-";
+  String NOTES = val_bar.data_ValPpList[index]['NOTES'] ?? "-";
+  String FLAG = val_bar.data_ValPpList[index]['FLAG'] ?? "-";
   String COBA_VAL = val_bar.data_ValPpList[index]['COBA_VAL'] ?? "-";
 
   final GlobalKey<State> _LoaderDialog = new GlobalKey<State>();
@@ -114,7 +117,7 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
-              DR,
+              TG_SMP,
               style: GoogleFonts.poppins(
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -125,7 +128,7 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
-              "-",
+              DIVISI,
               style: GoogleFonts.poppins(
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -136,7 +139,29 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
-              TOTAL_QTY,
+              KET,
+              style: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          SizedBox(width: 3),
+          Expanded(
+            flex: 2,
+            child: Text(
+              NOTES,
+              style: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          SizedBox(width: 3),
+          Expanded(
+            flex: 2,
+            child: Text(
+              FLAG,
               style: GoogleFonts.poppins(
                 fontSize: 10,
                 fontWeight: FontWeight.w500,

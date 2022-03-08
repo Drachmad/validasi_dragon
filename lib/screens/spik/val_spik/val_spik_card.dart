@@ -1,23 +1,23 @@
 import 'package:admin/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:admin/controllers/pp_controller.dart';
+import 'package:admin/controllers/spik_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
-    {VoidCallback? pressDetail, VoidCallback? pressTawar}) {
-  int offset = Provider.of<ValPpController>(context, listen: false).offset;
+Widget SPIKCard(BuildContext context, int index, SPIKController spik_controller,
+    {VoidCallback? pressDetail, VoidCallback? pressDelete}) {
+  int offset = Provider.of<SPIKController>(context, listen: false).offset;
 
-  String NO_BUKTI = val_bar.data_ValPpList[index]['NO_BUKTI'] ?? "-";
-  String date = val_bar.data_ValPpList[index]['TGL'] ?? "-";
-  DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(date);
-  String TGL = DateFormat("dd-MM-yyyy").format(tempDate);
-  String DR = val_bar.data_ValPpList[index]['DR'] ?? "-";
-  String tempTOTAL_QTY = val_bar.data_ValPpList[index]['TOTAL_QTY'] ?? "-";
-  String TOTAL_QTY =
-      NumberFormat.decimalPattern().format(double.parse(tempTOTAL_QTY));
-  String COBA_VAL = val_bar.data_ValPpList[index]['COBA_VAL'] ?? "-";
+  // String NO_BUKTI = spik_controller.data_SPIKList[index]['NO_BUKTI'] ?? "-";
+  // String date = spik_controller.data_SPIKList[index]['TGL'] ?? "-";
+  // DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(date);
+  // String TGL = DateFormat("dd-MM-yyyy").format(tempDate);
+  // String NAMAS = spik_controller.data_SPIKList[index]['NAMAS'] ?? "-";
+  // String KODES = spik_controller.data_SPIKList[index]['KODES'] ?? "-";
+  // String tempTOTAL = spik_controller.data_SPIKList[index]['TOTAL'] ?? "-";
+  // String TOTAL = NumberFormat.decimalPattern().format(double.parse(tempTOTAL));
+  // String COBA_VAL = spik_controller.data_SPIKList[index]['COBA_VAL'] ?? "-";
 
   final GlobalKey<State> _LoaderDialog = new GlobalKey<State>();
 
@@ -45,8 +45,8 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
             TextButton(
               child: Text('Validasi'),
               onPressed: () {
-                val_bar.update_ValPp(NO_BUKTI);
-                Navigator.of(context).pop();
+                // spik_controller.update_SPIK(NO_BUKTI);
+                // Navigator.of(context).pop();
               },
             ),
           ],
@@ -89,7 +89,8 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
                 onTap: pressDetail,
                 child: Center(
                   child: Text(
-                    NO_BUKTI,
+                    // NO_BUKTI,
+                    "-",
                     style: GoogleFonts.poppins(
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -103,28 +104,7 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
-              TGL,
-              style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          SizedBox(width: 3),
-          Expanded(
-            flex: 2,
-            child: Text(
-              DR,
-              style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          SizedBox(width: 3),
-          Expanded(
-            flex: 2,
-            child: Text(
+              // NO_ORDER,
               "-",
               style: GoogleFonts.poppins(
                 fontSize: 10,
@@ -136,7 +116,8 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
-              TOTAL_QTY,
+              // TGL,
+              "-",
               style: GoogleFonts.poppins(
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -146,30 +127,44 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           SizedBox(width: 3),
           Expanded(
             flex: 2,
-            child: (COBA_VAL != '1')
-                ? Container(
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        _showMyDialog();
-                      },
-                      child: Center(
-                        child: Text(
-                          "Val",
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+            child: Text(
+              // DR,
+              "-",
+              style: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          SizedBox(width: 3),
+          Expanded(
+              flex: 2,
+              child:
+                  // (COBA_VAL != '1')
+                  //     ?
+                  Container(
+                height: 32,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    _showMyDialog();
+                  },
+                  child: Center(
+                    child: Text(
+                      "Val",
+                      style: GoogleFonts.poppins(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  )
-                : SizedBox(),
-          ),
+                  ),
+                ),
+              )
+              // : SizedBox(),
+              ),
           SizedBox(
             width: 8,
           ),

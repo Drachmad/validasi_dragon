@@ -6,20 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:admin/controllers/pp_controller.dart';
-import 'package:admin/screens/pp/val_pp_bahan/data_detail.dart';
-import 'package:admin/screens/pp/val_pp_bahan/val_pp_bahan_card.dart';
+import 'package:admin/screens/pp/val_pp_pisau/data_detail.dart';
+import 'package:admin/screens/pp/val_pp_pisau/val_pp_pisau_card.dart';
 import 'package:provider/provider.dart';
 
-class ValPpBahanScreen extends StatefulWidget {
+class ValPpPisauScreen extends StatefulWidget {
   @override
-  _ValPpBahanScreenState createState() => _ValPpBahanScreenState();
+  _ValPpPisauScreenState createState() => _ValPpPisauScreenState();
 }
 
-class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
+class _ValPpPisauScreenState extends State<ValPpPisauScreen> {
   @override
   void initState() {
-    var DR = Get.parameters['DR'];
-    Provider.of<ValPpController>(context, listen: false).initData('', DR!, '');
+    // var SUB = Get.parameters['SUB'];
+    Provider.of<ValPpController>(context, listen: false)
+        .initData('PISAU', '', '');
 
     super.initState();
   }
@@ -27,7 +28,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ValPpController>(
-        builder: (context, ValPpBahan_Controller, child) {
+        builder: (context, ValPpPisau_Controller, child) {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -44,7 +45,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                   onPressed: context.read<MenuController>().controlMenu,
                 ),
               Text(
-                "VALIDASI PP BAHAN",
+                "VALIDASI PP PISAU",
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -67,7 +68,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                       flex: 3,
                       child: Row(
                         children: [
-                          if (ValPpBahan_Controller.data_ValPpList.length > 0)
+                          if (ValPpPisau_Controller.data_ValPpList.length > 0)
                             Text(
                               "Showing",
                               style: GoogleFonts.poppins(
@@ -75,7 +76,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                          if (ValPpBahan_Controller.data_ValPpList.length > 0)
+                          if (ValPpPisau_Controller.data_ValPpList.length > 0)
                             Padding(
                               padding: const EdgeInsets.only(left: 16),
                               child: Container(
@@ -91,17 +92,17 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                                     child: DropdownButton(
                                       isExpanded: true,
                                       iconEnabledColor: kPrimaryLightColor,
-                                      value: ValPpBahan_Controller.limit,
+                                      value: ValPpPisau_Controller.limit,
                                       items:
-                                          ValPpBahan_Controller.dropdownLimit,
+                                          ValPpPisau_Controller.dropdownLimit,
                                       onChanged: (value) {
                                         if (value != null) {
-                                          ValPpBahan_Controller.limit =
+                                          ValPpPisau_Controller.limit =
                                               value as int;
-                                          ValPpBahan_Controller
+                                          ValPpPisau_Controller
                                               .selectDataPaginate(
                                                   false,
-                                                  ValPpBahan_Controller
+                                                  ValPpPisau_Controller
                                                       .cari.text);
                                         }
                                       },
@@ -128,7 +129,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                               child: Container(
                                 height: 20,
                                 child: TextField(
-                                  controller: ValPpBahan_Controller.cari,
+                                  controller: ValPpPisau_Controller.cari,
                                   onChanged: (value) {
                                     Provider.of<ValPpController>(context,
                                         listen: false);
@@ -182,7 +183,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                       Expanded(
                         flex: 3,
                         child: Text(
-                          "No PP",
+                          "No Bukti",
                           style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -204,7 +205,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                       Expanded(
                         flex: 2,
                         child: Text(
-                          "DR",
+                          "Tgl Minta",
                           style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -215,7 +216,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                       Expanded(
                         flex: 2,
                         child: Text(
-                          "Model",
+                          "Divisi",
                           style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -226,7 +227,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                       Expanded(
                         flex: 2,
                         child: Text(
-                          "Total Order",
+                          "Ket",
                           style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -237,7 +238,29 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                       Expanded(
                         flex: 2,
                         child: Text(
-                          "Proses",
+                          "TS",
+                          style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 3),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          "Pesan",
+                          style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 3),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          "",
                           style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -252,19 +275,19 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                 ),
               ),
               Expanded(
-                child: (ValPpBahan_Controller.data_ValPpList.length > 0)
+                child: (ValPpPisau_Controller.data_ValPpList.length > 0)
                     ? ListView.builder(
-                        itemCount: ValPpBahan_Controller.data_ValPpList.length,
+                        itemCount: ValPpPisau_Controller.data_ValPpList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ValPpBahanCard(
-                              context, index, ValPpBahan_Controller,
+                          return ValPpPisauCard(
+                              context, index, ValPpPisau_Controller,
                               pressDetail: () {
                             showAnimatedDialog(
                                 context,
                                 DataDetail(
-                                    NO_BUKTI: ValPpBahan_Controller
+                                    NO_BUKTI: ValPpPisau_Controller
                                         .data_ValPpList[index]['NO_BUKTI'],
-                                    controller: ValPpBahan_Controller),
+                                    controller: ValPpPisau_Controller),
                                 isFlip: true);
                           }, pressTawar: () {});
                         },
@@ -273,7 +296,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                         child: Center(
                           child: TextField(
                             textAlign: TextAlign.center,
-                            controller: ValPpBahan_Controller.dataNotif,
+                            controller: ValPpPisau_Controller.dataNotif,
                             readOnly: true,
                             style: GoogleFonts.poppins(
                               fontSize: 10,
@@ -317,21 +340,21 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    if (ValPpBahan_Controller.page_index > 0) {
-                      ValPpBahan_Controller.offset -=
-                          ValPpBahan_Controller.limit;
-                      ValPpBahan_Controller.page_index--;
-                      ValPpBahan_Controller.c_page.text =
-                          (ValPpBahan_Controller.page_index + 1).toString();
-                      ValPpBahan_Controller.selectDataPaginate(
-                          false, ValPpBahan_Controller.cari.text);
+                    if (ValPpPisau_Controller.page_index > 0) {
+                      ValPpPisau_Controller.offset -=
+                          ValPpPisau_Controller.limit;
+                      ValPpPisau_Controller.page_index--;
+                      ValPpPisau_Controller.c_page.text =
+                          (ValPpPisau_Controller.page_index + 1).toString();
+                      ValPpPisau_Controller.selectDataPaginate(
+                          false, ValPpPisau_Controller.cari.text);
                     }
                   },
                   child: Container(
                     height: 30,
                     width: 80,
                     decoration: BoxDecoration(
-                      color: (ValPpBahan_Controller.offset == 0)
+                      color: (ValPpPisau_Controller.offset == 0)
                           ? bgColorDark
                           : primaryColor,
                       borderRadius: BorderRadius.circular(5),
@@ -343,7 +366,7 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                         style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
-                            color: (ValPpBahan_Controller.offset == 0)
+                            color: (ValPpPisau_Controller.offset == 0)
                                 ? bgColorDark
                                 : kPrimaryLightColor),
                       ),
@@ -353,23 +376,23 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                 pageField(),
                 InkWell(
                   onTap: () {
-                    if (ValPpBahan_Controller.page_index <=
-                        ValPpBahan_Controller.pageCount - 1) {
-                      ValPpBahan_Controller.offset +=
-                          ValPpBahan_Controller.limit;
-                      ValPpBahan_Controller.page_index++;
-                      ValPpBahan_Controller.c_page.text =
-                          (ValPpBahan_Controller.page_index + 1).toString();
-                      ValPpBahan_Controller.selectDataPaginate(
-                          false, ValPpBahan_Controller.cari.text);
+                    if (ValPpPisau_Controller.page_index <=
+                        ValPpPisau_Controller.pageCount - 1) {
+                      ValPpPisau_Controller.offset +=
+                          ValPpPisau_Controller.limit;
+                      ValPpPisau_Controller.page_index++;
+                      ValPpPisau_Controller.c_page.text =
+                          (ValPpPisau_Controller.page_index + 1).toString();
+                      ValPpPisau_Controller.selectDataPaginate(
+                          false, ValPpPisau_Controller.cari.text);
                     }
                   },
                   child: Container(
                     height: 30,
                     width: 80,
                     decoration: BoxDecoration(
-                      color: ((ValPpBahan_Controller.pageCount -
-                                  ValPpBahan_Controller.page_index) <=
+                      color: ((ValPpPisau_Controller.pageCount -
+                                  ValPpPisau_Controller.page_index) <=
                               1)
                           ? bgColorDark
                           : primaryColor,
@@ -382,8 +405,8 @@ class _ValPpBahanScreenState extends State<ValPpBahanScreen> {
                         style: GoogleFonts.poppins(
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
-                            color: ((ValPpBahan_Controller.pageCount -
-                                        ValPpBahan_Controller.page_index) <=
+                            color: ((ValPpPisau_Controller.pageCount -
+                                        ValPpPisau_Controller.page_index) <=
                                     1)
                                 ? bgColorDark
                                 : kPrimaryLightColor),

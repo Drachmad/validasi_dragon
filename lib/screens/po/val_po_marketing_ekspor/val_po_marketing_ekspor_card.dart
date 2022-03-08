@@ -1,25 +1,22 @@
 import 'package:admin/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:admin/controllers/pp_controller.dart';
+import 'package:admin/controllers/po_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
-    {VoidCallback? pressDetail, VoidCallback? pressTawar}) {
-  int offset = Provider.of<ValPpController>(context, listen: false).offset;
+Widget ValPoMarketingEksporCard(
+    BuildContext context, int index, ValPoController val_bar,
+    {VoidCallback? pressDetail, VoidCallback? pressDelete}) {
+  int offset = Provider.of<ValPoController>(context, listen: false).offset;
 
-  String NO_BUKTI = val_bar.data_ValPpList[index]['NO_BUKTI'] ?? "-";
-  String date = val_bar.data_ValPpList[index]['TGL'] ?? "-";
+  String NO_BUKTI = val_bar.data_ValPoList[index]['NO_BUKTI'] ?? "-";
+  String NO_SURAT = val_bar.data_ValPoList[index]['NO_SURAT'] ?? "-";
+  String date = val_bar.data_ValPoList[index]['TGL'] ?? "-";
   DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(date);
   String TGL = DateFormat("dd-MM-yyyy").format(tempDate);
-  String DR = val_bar.data_ValPpList[index]['DR'] ?? "-";
-  String tempTOTAL_QTY = val_bar.data_ValPpList[index]['TOTAL_QTY'] ?? "-";
-  String TOTAL_QTY =
-      NumberFormat.decimalPattern().format(double.parse(tempTOTAL_QTY));
-  String COBA_VAL = val_bar.data_ValPpList[index]['COBA_VAL'] ?? "-";
-
-  final GlobalKey<State> _LoaderDialog = new GlobalKey<State>();
+  String DR = val_bar.data_ValPoList[index]['DR'] ?? "-";
+  String COBA_VAL = val_bar.data_ValPoList[index]['COBA_VAL'] ?? "-";
 
   Future<void> _showMyDialog() async {
     return showDialog<void>(
@@ -45,7 +42,7 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
             TextButton(
               child: Text('Validasi'),
               onPressed: () {
-                val_bar.update_ValPp(NO_BUKTI);
+                val_bar.update_ValPo(NO_BUKTI);
                 Navigator.of(context).pop();
               },
             ),
@@ -103,6 +100,17 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
           Expanded(
             flex: 2,
             child: Text(
+              NO_SURAT,
+              style: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          SizedBox(width: 3),
+          Expanded(
+            flex: 2,
+            child: Text(
               TGL,
               style: GoogleFonts.poppins(
                 fontSize: 10,
@@ -115,28 +123,6 @@ Widget ValPpBahanCard(BuildContext context, int index, ValPpController val_bar,
             flex: 2,
             child: Text(
               DR,
-              style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          SizedBox(width: 3),
-          Expanded(
-            flex: 2,
-            child: Text(
-              "-",
-              style: GoogleFonts.poppins(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          SizedBox(width: 3),
-          Expanded(
-            flex: 2,
-            child: Text(
-              TOTAL_QTY,
               style: GoogleFonts.poppins(
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
