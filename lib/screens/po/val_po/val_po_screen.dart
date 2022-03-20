@@ -227,15 +227,28 @@ class _ValPoScreenState extends State<ValPoScreen> {
                     ),
                     SizedBox(width: 3),
                     Expanded(
-                      flex: 2,
-                      child: Text(
-                        "Proses",
-                        style: GoogleFonts.poppins(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
+                        flex: 2,
+                        child: Container(
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              ValPo_Controller.showMyDialog(context);
+                            },
+                            child: Center(
+                              child: Text(
+                                "Val",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )),
                     SizedBox(
                       width: 8,
                     ),
@@ -247,16 +260,20 @@ class _ValPoScreenState extends State<ValPoScreen> {
                     ? ListView.builder(
                         itemCount: ValPo_Controller.data_ValPoList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ValPoCard(context, index, ValPo_Controller,
-                              pressDetail: () {
-                            showAnimatedDialog(
-                                context,
-                                DataDetail(
-                                    NO_BUKTI: ValPo_Controller
-                                        .data_ValPoList[index]['NO_BUKTI'],
-                                    controller: ValPo_Controller),
-                                isFlip: true);
-                          }, pressDelete: () {});
+                          return ValPoCard(
+                            context,
+                            index,
+                            ValPo_Controller,
+                            pressDetail: () {
+                              showAnimatedDialog(
+                                  context,
+                                  DataDetail(
+                                      NO_BUKTI: ValPo_Controller
+                                          .data_ValPoList[index]['NO_BUKTI'],
+                                      controller: ValPo_Controller),
+                                  isFlip: true);
+                            },
+                          );
                         },
                       )
                     : Container(

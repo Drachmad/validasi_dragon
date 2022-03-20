@@ -5,6 +5,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'login_controller.dart';
 
 class ValPoController with ChangeNotifier {
+  List<String> indexVal = <String>[];
+
+  addItem(String val) {
+    indexVal.add(val);
+    print(indexVal);
+  }
+
+  removeItem(String val) {
+    indexVal.removeWhere((data) => data == val);
+    print(indexVal);
+  }
+
   List data_ValPoList = [];
   List DataDetailList = [];
   bool proses = false;
@@ -29,6 +41,7 @@ class ValPoController with ChangeNotifier {
   Future<void> initData(
       String paramFLAG, String paramDR, String paramJENIS) async {
     data_ValPoList = [];
+    indexVal = [];
     c_page.text = '1';
     FLAG = paramFLAG;
     DR = paramDR;
@@ -99,15 +112,44 @@ class ValPoController with ChangeNotifier {
     obj['COBA_USRVAL'] = LoginController.nama_staff;
     obj['COBA_TGLVAL'] = DateTime.now();
     await m_ValPo.update_ValPo(obj, DataDetailList.length);
-    Fluttertoast.showToast(
-        msg: "Validasi Sukses",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 2,
-        backgroundColor: secondaryColor,
-        textColor: Colors.white,
-        fontSize: 16.0);
     notifyListeners();
     await selectDataPaginate(true, '');
+  }
+
+  Future<void> showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Validasi'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text('Yakin Ingin Memvalidasi?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Validasi'),
+              onPressed: () {
+                for (int x = 0; x < indexVal.length; x++) {
+                  update_ValPo(indexVal[x]);
+                }
+                indexVal = [];
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
